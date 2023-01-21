@@ -1,0 +1,13 @@
+addition format :
+...is.done...
+new deafalt for notebad :
+C://Windows//notepad
+txt
+new for video :
+C:\\Users\\Mo Nasr\\vlc\\vlc
+mp4
+mkv
+new for edge :
+C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge
+pdf
+html
