@@ -1,6 +1,8 @@
 import subprocess
 import os
 import sys
+import shlex
+import winreg
 
 # to get username of kernal
 user_name = os.getlogin()
@@ -12,22 +14,9 @@ if len(sys.argv) == 1:
     input(" press Enter to exit......")
     exit()
 
-# The deafualt prgram path (this is for stored tmp paths)
-path_tmp = "C://Windows//notepad"
-
-# variable for check in file
-get_add = 0
-get_path = 0
-
-# paths of files 
+# paths of files opened
 my_program_path = sys.argv[0]
 file_path = sys.argv[1]
-
-# The deafualt programme path ( result path )
-run_program_path = "C://Windows//notepad"
-
-# The addition part
-addition = "...is.done..."
 
 # To get extention of the file
 new_vector = file_path.split('.')
@@ -38,47 +27,96 @@ formating_path = my_parent_path + '\\' + "Formating.txt"
 
 # To get path of file
 real_path = file_path
-while real_path[-1] != '.':
+while len(real_path) > 1 and real_path[-1] != '.':
     real_path = real_path[:-1]
 
-# For checking Formation.txt file 
-for i in open(formating_path, "r"):
-    if i[-1] == '\n':
-        i = i[:-1]
-    spl = i.split(' ')
-    if get_add == 1:
-        get_add = 0
-        addition = i
-    elif get_path == 1:
-        get_path = 0
-        path_tmp = i
-    elif spl[0] == "new":
-        get_path = 1
-    elif spl[0] == "addition":
-        get_add = 1
-    elif i == new_vector[-1]:
-        run_program_path = path_tmp
-        
-try :
-    
-    # new name of the file 
-    new_path = real_path + addition + "." + new_vector[-1]
+# to avoid errors
+addition = ""
+run_pdf = ""
+run_note = ""
+run_video = ""
+index=0
 
+# Ckeck the defualt apps
+for line in open(formating_path, "r"):
+    if line[-1] == '\n':
+        line = line[:-1]
+    if index == 1:
+        addition = line
+    elif index == 3:
+        run_note = line
+    elif index == 5:
+        run_pdf = line
+    elif index == 7:
+        run_video = line
+    index += 1
+
+run_program = run_video
+path = "xxx"
+suffix = '.' + new_vector[-1]
+
+# get defualt app in windows
+try :
+    class_root = winreg.QueryValue(winreg.HKEY_CLASSES_ROOT, suffix)
+    with winreg.OpenKey(winreg.HKEY_CLASSES_ROOT, r'{}\shell\open\command'.format(class_root)) as key:
+        command = winreg.QueryValueEx(key, '')[0]
+        path = shlex.split(command)[0]
+except : 
+    path = "xxx"
+
+# get proirity for defualt for windows and update variable
+if new_vector[-1] == "pdf":
+    if path =="xxx" :
+        run_program = run_pdf
+    elif "IsDone.exe" in path :
+        run_program = run_pdf
+    else:
+        run_pdf = path
+        run_program = path
+elif new_vector[-1] == "txt":
+    if path =="xxx":
+        run_program = run_note
+    elif "IsDone.exe" in path :
+        run_program = run_note
+    else:
+        run_note = path
+        run_program = path
+else:
+    if path =="xxx":
+        run_program = run_video
+    elif "IsDone.exe" in path :
+        run_program = run_video
+    else:
+        run_video = path
+        run_program = path
+
+# try to update name and open subprocess
+try:
+
+    # new name of the file
+    new_path = real_path + addition + "." + new_vector[-1]
+    
     if addition in file_path:
         # if the addition already exist in file name
         new_path = file_path
     else:
         # rename the file
         os.rename(file_path, new_path)
-
     # To run file
-    p = subprocess.Popen([run_program_path, new_path])
+    p = subprocess.Popen([run_program, new_path])
     
+    # write the updated apps defualt in Formating.txt file
+    file1=open(formating_path, "w")
+    file1.write("Addition part : \n"+addition+'\n')
+    file1.write("for text : \n"+run_note+'\n')
+    file1.write("for pdf : \n"+run_pdf+'\n')
+    file1.write("for video : \n"+run_video)
+    file1.close()
+
 except:
-    
+    # get error in subprocess
     print("            Hi " + user_name + ", o_0 \n")
     print("    There is an erorr of Formating.txt file please check the format of the file\n")
-    print("                       good luck :)   ")
+    print("\n")
     input(" press Enter to exit......")
     exit()
-
