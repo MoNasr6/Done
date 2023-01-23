@@ -1,0 +1,8 @@
+Addition part : 
+....is.done....
+for text : 
+C:\\Windows\\notepad
+for pdf : 
+C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge
+for video : 
+C:\\Program Files (x86)\\Windows Media Player\\wmplayer.exe
