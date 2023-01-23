@@ -1,0 +1,21 @@
+Processing config: C:\Program Files (x86)\NSIS\nsisconf.nsh
+Processing script file: "C:\Users\MONASR~1\AppData\Local\Temp\nseE4B9.tmp" (ACP)
+
+Processed 1 file, writing output (x86-unicode):
+
+Output: "E:\barmga\projects\python\IsDone\Setup.exe"
+Install: 6 pages (384 bytes), 2 sections (2 required) (4144 bytes), 473 instructions (13244 bytes), 252 strings (10070 bytes), 1 language table (338 bytes).
+Uninstall: 3 pages (256 bytes), 1 section (2072 bytes), 324 instructions (9072 bytes), 209 strings (8066 bytes), 1 language table (286 bytes).
+
+Using zlib compression.
+
+EXE header size:               53760 / 39936 bytes
+Install code:                   5117 / 28644 bytes
+Install data:                6397864 / 14288642 bytes
+Uninstall code+data:           30882 / 35203 bytes
+CRC (0x33822A27):                  4 / 4 bytes
+
+Total size:                  6487627 / 14392429 bytes (45.0%)
+
+1 warning:
+  9000: Insecure filename "Setup.exe", Windows will unsafely load compatibility shims into the process.
