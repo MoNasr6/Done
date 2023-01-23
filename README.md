@@ -1,4 +1,5 @@
 # Done
+This program for mark ( rename ) file what is done watched. 
 
 This program appears to be a script that is intended to open and run files of different types (pdf, txt, and videos) using specific programs specified in a text file called "Formating.txt". The program first gets the username of the user running the script and displays a message if the script is opened by itself. It then retrieves the paths of the files opened and gets the file extension of the file. It also gets the parent path of the script file and reads from "Formating.txt" to get the default programs for each file type. The program then checks the default apps for the file type in Windows and updates the variables for the default programs. The script then attempts to rename the file with an "addition" specified in "Formating.txt" and opens the file with the default program for that file type. Finally, the script writes the updated default programs back to "Formating.txt".
 - [How to use](#How-to-use)
@@ -6,10 +7,10 @@ This program appears to be a script that is intended to open and run files of di
 - [what is program suitable for](#what-is-program-suitable-for)
 
 ## How to use
+when you open file use the program by file->open with -> the executable file ( Done.exe ) then the program will rename file and run it by default program in windows .
 
 download the Setup.exe file and install the program
 for download : https://raw.githubusercontent.com/MoNasr6/IsDone/main/Setup.exe
-
 
 ## what is program suitable for
 
